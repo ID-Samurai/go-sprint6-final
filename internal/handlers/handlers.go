@@ -22,11 +22,14 @@ func MainHandler(res http.ResponseWriter, req *http.Request) {
 	fileName := filepath.Join(curDir, "index.html")
 
 	data, err := os.ReadFile(fileName)
-	res.Write(data)
 	if err != nil {
 		http.Error(res, "File reading error index.html", http.StatusInternalServerError)
 		return
 	}
+
+	res.Header().Set("Content-Type", "text/html")
+	res.WriteHeader(http.StatusOK)
+	res.Write(data)
 
 }
 func UploadHandler(res http.ResponseWriter, req *http.Request) {
@@ -51,7 +54,7 @@ func UploadHandler(res http.ResponseWriter, req *http.Request) {
 		http.Error(res, "File decoding error", http.StatusInternalServerError)
 		return
 	}
-	fileName := time.Now().UTC().Format("15:04 02-01-2006")
+	fileName := time.Now().UTC().Format("15:04:05 02-01-2006")
 	fileExt := filepath.Ext(header.Filename)
 	newFileName := fmt.Sprintf("Decoded_file_%s%s", fileName, fileExt)
 	newFile, err := os.Create(newFileName)

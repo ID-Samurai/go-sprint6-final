@@ -14,7 +14,7 @@ import (
 func MainHandler(res http.ResponseWriter, req *http.Request) {
 	wd, err := os.Getwd()
 	if err != nil {
-		http.Error(res, "Repository definition error", http.StatusOK)
+		http.Error(res, "Repository definition error", http.StatusInternalServerError)
 		return
 	}
 
@@ -23,7 +23,7 @@ func MainHandler(res http.ResponseWriter, req *http.Request) {
 
 	data, err := os.ReadFile(fileName)
 	if err != nil {
-		http.Error(res, "File reading error index.html", http.StatusInternalServerError)
+		http.Error(res, "File reading error index.html", http.StatusOK)
 		return
 	}
 

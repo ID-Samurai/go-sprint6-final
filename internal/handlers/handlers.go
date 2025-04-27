@@ -18,12 +18,12 @@ func MainHandler(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	curDir := filepath.Dir(wd)
-	fileName := filepath.Join(curDir, "index.html")
+	fileName := filepath.Join(wd, "index.html")
+	fmt.Printf(fileName)
 
 	data, err := os.ReadFile(fileName)
 	if err != nil {
-		http.Error(res, "File reading error index.html", http.StatusOK)
+		http.Error(res, "File reading error index.html", http.StatusInternalServerError)
 		return
 	}
 

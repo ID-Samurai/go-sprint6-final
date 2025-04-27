@@ -30,7 +30,6 @@ func MainHandler(res http.ResponseWriter, req *http.Request) {
 	res.Header().Set("Content-Type", "text/html")
 	res.WriteHeader(http.StatusOK)
 	res.Write(data)
-
 }
 func UploadHandler(res http.ResponseWriter, req *http.Request) {
 	if err := req.ParseForm(); err != nil {
@@ -68,7 +67,9 @@ func UploadHandler(res http.ResponseWriter, req *http.Request) {
 		http.Error(res, "Error recording", http.StatusInternalServerError)
 		return
 	}
+	// res.Header().Set("Content-Type", "text/html")
 	res.WriteHeader(http.StatusOK)
-	fmt.Fprintf(res, "Result %s\nFile %s", text, newFileName)
+	// fmt.Fprintf(res, "Result %s\nFile %s", text, newFileName)
+	fmt.Fprintf(res, text)
 
 }

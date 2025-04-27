@@ -14,7 +14,7 @@ import (
 func MainHandler(res http.ResponseWriter, req *http.Request) {
 	wd, err := os.Getwd()
 	if err != nil {
-		http.Error(res, "Repository definition error", http.StatusInternalServerError)
+		http.Error(res, "Repository definition error", http.StatusOK)
 		return
 	}
 
